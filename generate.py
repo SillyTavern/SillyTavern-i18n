@@ -2,6 +2,7 @@ from collections import OrderedDict
 import json
 import os
 from sys import argv
+import sys
 from bs4 import BeautifulSoup
 from deep_translator import GoogleTranslator
 
@@ -48,9 +49,9 @@ def update_json(json_file, i18n_dict):
         for key in i18n_dict.keys():
             if key not in data and i18n_dict[key] != "":
                 print(f"Key '{key}' not found in '{json_file}'.")
-                data[key] = GoogleTranslator(source='en', target='zh-CN').translate(i18n_dict[key])
+                data[key] = GoogleTranslator(source='en', target=json_file.split('/')[-1].split('.')[0]).translate(i18n_dict[key])
     except Exception as e:
-        print(f"Error processing '{json_file}': {e}")
+        print(f"Error processing '{json_file}': {e}", file=sys.stderr)
 
     for key in list(data.keys()):
         if key not in i18n_dict:
@@ -75,7 +76,7 @@ if __name__ == "__main__":
     if directory_path.endswith('/locales'):
         directory_path = directory_path[:-8]
     if not os.path.exists(directory_path):
-        print(f"Directory '{directory_path}' not found.")
+        print(f"Directory '{directory_path}' not found.", file=sys.stderr)
         exit(1)
 
     locales_path = os.path.join(directory_path, 'locales')
@@ -93,7 +94,7 @@ if __name__ == "__main__":
             if os.path.exists(new_json_file_path):
                 json_file_path = new_json_file_path
             else:
-                print(f"JSON file '{json_file_path}' not found.")
+                print(f"JSON file '{json_file_path}' not found.", file=sys.stderr)
                 exit(1)
         updated_json = update_json(json_file_path, all_i18n_data)
     else:

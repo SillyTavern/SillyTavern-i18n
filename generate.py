@@ -66,9 +66,9 @@ def update_json(json_file, i18n_dict):
 
 if __name__ == "__main__":
     directory_path = "public"
-    if argv[1]:
+    if len(argv) > 1 and argv[1]:
         json_file_path = argv[1]
-    if argv[2]:
+    if len(argv) > 2 and argv[2]:
         directory_path = argv[2]
     if directory_path.endswith('/'):
         directory_path = directory_path[:-1]

@@ -46,10 +46,17 @@ def update_json(json_file, i18n_dict):
         data = json.load(file, object_pairs_hook=OrderedDict)
 
     try:
+        language = json_file.split('/')[-1].split('.')[0]
         for key in i18n_dict.keys():
             if key not in data and i18n_dict[key] != "":
                 print(f"Key '{key}' not found in '{json_file}'.")
-                data[key] = GoogleTranslator(source='en', target=json_file.split('/')[-1].split('.')[0]).translate(i18n_dict[key])
+                try:
+                    data[key] = GoogleTranslator(source='en', target=language).translate(i18n_dict[key])
+                except Exception as x:
+                    if 'No support for the provided language' in str(x):
+                        language = language.split('-')[0]
+                        data[key] = GoogleTranslator(source='en', target=language).translate(i18n_dict[key])
+                    
     except Exception as e:
         print(f"Error processing '{json_file}': {e}", file=sys.stderr)
 
@@ -66,7 +73,9 @@ def update_json(json_file, i18n_dict):
 
 
 if __name__ == "__main__":
+    json_file_path = None
     directory_path = "public"
+
     if len(argv) > 1 and argv[1]:
         json_file_path = argv[1]
     if len(argv) > 2 and argv[2]:
@@ -100,7 +109,7 @@ if __name__ == "__main__":
     else:
         print("Updating all JSON files...")
         for json_file in os.listdir(locales_path):
-            if json_file.endswith('.json'):
+            if json_file.endswith('.json') and not json_file.endswith('lang.json'):
                 json_file_path = os.path.join(locales_path, json_file)
                 updated_json = update_json(json_file_path, all_i18n_data)
     print("Done!")

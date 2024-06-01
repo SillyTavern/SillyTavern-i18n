@@ -55,7 +55,7 @@ def update_json(json_file, i18n_dict):
 
     for key in list(data.keys()):
         if key not in i18n_dict:
-            print(f"Key '{key}' not found in '{json_file}'.")
+            print(f"{json_file} has extra key '{key}' not found in i18n dataset.")
             del data[key]
 
     with open(json_file, 'w', encoding='utf-8', newline='\n') as file:

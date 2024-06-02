@@ -11,17 +11,7 @@ Tools for working with frontend localization files.
 
 ## Usage
 
-Dependencies: Python 3.10
-
-1) Install the requirements.
-
-```bash
-pip install -r ./requirements.txt
-```
-
-2) Run `generate.py` **while in the SillyTavern directory**.
-
-```bash
+```txt
 usage: generate.py [-h] [-d DIRECTORY] [--auto-add] [--auto-remove] [--sort-keys]
                    json
 
@@ -38,6 +28,17 @@ options:
   --auto-remove         Auto remove extra keys
   --sort-keys           Sort keys as they appear in i18n dataset
 ```
+
+Dependencies: Python 3.10
+
+1) Install the requirements.
+
+```bash
+pip install -r ./requirements.txt
+```
+
+2) Run `generate.py` **while in the SillyTavern directory**.
+
 
 Example:
 

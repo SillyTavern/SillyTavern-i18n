@@ -5,11 +5,19 @@ Tools for working with frontend localization files.
 ## Usage
 
 ```bash
-~ > pip install -r requirements.txt
-~ > cd /e/SillyTavern
-~ > py ~/workstation/sillytavern-i18n/generate.py zh-cn
-Done!
-~ > py ~/workstation/sillytavern-i18n/generate.py
-Updating all JSON files...
-Done!
+usage: generate.py [-h] [-d DIRECTORY] [--auto-add] [--auto-remove] [--sort-keys]
+                   json
+
+Update or Generate i18n JSON files
+
+positional arguments:
+  json                  JSON file path
+
+options:
+  -h, --help            show this help message and exit
+  -d DIRECTORY, --directory DIRECTORY
+                        Directory path
+  --auto-add            Auto add missing keys
+  --auto-remove         Auto remove extra keys
+  --sort-keys           Sort keys as they appear in i18n dataset
 ```

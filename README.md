@@ -2,7 +2,7 @@
 
 Tools for working with frontend localization files.
 
-Features:
+## Features
 
 1. Automatically add new keys to translate from HTML files.
 2. Prune missing keys from localization files.
@@ -45,3 +45,10 @@ Example:
 cd ~/SillyTavern
 python ~/SillyTavern-i18n/generate.py zh-cn --sort-keys
 ```
+
+## License and credits
+
+AGPLv3
+
+* Original idea and implementation by (Zhongyi-Lu)[https://github.com/Zhongyi-Lu]
+* Improvements by (steve02081504)[https://github.com/steve02081504]

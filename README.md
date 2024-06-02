@@ -39,13 +39,14 @@ pip install -r ./requirements.txt
 
 2) Run `generate.py` **while in the SillyTavern directory**.
 
-
-Example:
+Example (update for `zh-cn` file, sort keys):
 
 ```bash
 cd ~/SillyTavern
 python ~/SillyTavern-i18n/generate.py zh-cn --sort-keys
 ```
+
+3) Commit and PR changes to the SillyTavern repository.
 
 ## License and credits
 

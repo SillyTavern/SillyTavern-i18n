@@ -50,5 +50,5 @@ python ~/SillyTavern-i18n/generate.py zh-cn --sort-keys
 
 AGPLv3
 
-* Original idea and implementation by (Zhongyi-Lu)[https://github.com/Zhongyi-Lu]
-* Improvements by (steve02081504)[https://github.com/steve02081504]
+* Original idea and implementation by [Zhongyi-Lu](https://github.com/Zhongyi-Lu)
+* Improvements by [steve02081504](https://github.com/steve02081504)

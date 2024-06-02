@@ -2,17 +2,26 @@
 
 Tools for working with frontend localization files.
 
+Features:
+
+1. Automatically add new keys to translate from HTML files.
+2. Prune missing keys from localization files.
+3. Use automatic Google translation to auto-populate missing values.
+4. Sort JSON files by keys.
+
 ## Usage
 
+Dependencies: Python 3.10
+
+1) Install the requirements.
+
 ```bash
-~/workstation/SillyTavern-i18n pr/2@e309665
-1 file >pip install -r ./requirements.txt *> null
+pip install -r ./requirements.txt
+```
 
-~/workstation/SillyTavern-i18n pr/2@e309665
-1 file >cd /e/SillyTavern/
+2) Run `generate.py` **while in the SillyTavern directory**.
 
-E:\SillyTavern pr/2336@886de3ca
- sillytavern@1.12.0 >py ~/workstation/SillyTavern-i18n/generate.py -h
+```bash
 usage: generate.py [-h] [-d DIRECTORY] [--auto-add] [--auto-remove] [--sort-keys]
                    json
 
@@ -28,14 +37,11 @@ options:
   --auto-add            Auto add missing keys
   --auto-remove         Auto remove extra keys
   --sort-keys           Sort keys as they appear in i18n dataset
+```
 
-E:\SillyTavern pr/2336@886de3ca
- sillytavern@1.12.0 >py ~/workstation/SillyTavern-i18n/generate.py zh-cn --sort-keys
-Key '' not found in './public\locales\zh-cn.json'.
-Done!
+Example:
 
-E:\SillyTavern pr/2336@886de3ca
- sillytavern@1.12.0 >py ~/workstation/SillyTavern-i18n/generate.py '' --sort-keys
-Updating all JSON files...
-Done!
+```bash
+cd ~/SillyTavern
+python ~/SillyTavern-i18n/generate.py zh-cn --sort-keys
 ```

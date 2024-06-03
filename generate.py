@@ -148,7 +148,7 @@ if __name__ == "__main__":
     else:
         print("Updating all JSON files...")
         for json_file in os.listdir(locales_path):
-            if json_file.endswith(".json") and not json_file.endswith("lang.json"):
+            if json_file.endswith(".json") and not json_file.endswith("lang.json") and not json_file.endswith("en.json"):
                 json_file_path = os.path.join(locales_path, json_file)
                 updated_json = update_json(json_file_path, all_i18n_data, flags)
     print("Done!")

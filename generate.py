@@ -30,14 +30,17 @@ def extract_i18n_keys(html_content):
 
 def process_html_files(directory):
     i18n_data = {}
+    html_files = []
     for root, dirs, files in os.walk(directory):
         for file in files:
             if file.endswith(".html"):
                 filepath = os.path.join(root, file)
-                with open(filepath, "r", encoding="utf-8") as f:
-                    html_content = f.read()
-
-                i18n_data.update(extract_i18n_keys(html_content))
+                html_files.append(filepath)
+    html_files.sort()
+    for html_file in html_files:
+        with open(html_file, "r", encoding="utf-8") as f:
+            html_content = f.read()
+            i18n_data.update(extract_i18n_keys(html_content))
     return i18n_data
 
 

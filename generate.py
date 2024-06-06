@@ -30,14 +30,17 @@ def extract_i18n_keys(html_content):
 
 def process_html_files(directory):
     i18n_data = {}
+    html_files = []
     for root, dirs, files in os.walk(directory):
         for file in files:
             if file.endswith(".html"):
                 filepath = os.path.join(root, file)
-                with open(filepath, "r", encoding="utf-8") as f:
-                    html_content = f.read()
-
-                i18n_data.update(extract_i18n_keys(html_content))
+                html_files.append(filepath)
+    html_files.sort()
+    for html_file in html_files:
+        with open(html_file, "r", encoding="utf-8") as f:
+            html_content = f.read()
+            i18n_data.update(extract_i18n_keys(html_content))
     return i18n_data
 
 
@@ -148,7 +151,7 @@ if __name__ == "__main__":
     else:
         print("Updating all JSON files...")
         for json_file in os.listdir(locales_path):
-            if json_file.endswith(".json") and not json_file.endswith("lang.json"):
+            if json_file.endswith(".json") and not json_file.endswith("lang.json") and not json_file.endswith("en.json"):
                 json_file_path = os.path.join(locales_path, json_file)
                 updated_json = update_json(json_file_path, all_i18n_data, flags)
     print("Done!")

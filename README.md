@@ -29,7 +29,7 @@ options:
   --sort-keys           Sort keys as they appear in i18n dataset
 ```
 
-Dependencies: Python 3.10
+Dependencies: Python 3.10 and up.
 
 1) Install the requirements.
 

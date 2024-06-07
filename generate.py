@@ -53,7 +53,7 @@ def update_json(
         data = json.load(file, object_pairs_hook=OrderedDict)
 
     try:
-        language = json_file.split("/")[-1].split(".")[0]
+        language = json_file.replace("\\", "/").split("/")[-1].split(".")[0]
         for key in i18n_dict.keys():
             if key not in data:
                 print(f"Key '{key}' not found in '{json_file}'.")
@@ -64,8 +64,13 @@ def update_json(
                         data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
                     except Exception as x:
                         if "No support for the provided language" in str(x):
-                            language = language.split("-")[0]
-                            data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
+                            language = language.split("-")[0]+'-'+language.split("-")[1].upper()
+                            try:
+                                data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
+                            except Exception as y:
+                                if "No support for the provided language" in str(y):
+                                    language = language.split("-")[0]
+                                    data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
 
     except Exception as e:
         print(f"Error processing '{json_file}': {e}", file=sys.stderr)

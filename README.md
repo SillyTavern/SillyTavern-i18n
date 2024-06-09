@@ -12,7 +12,7 @@ Tools for working with frontend localization files.
 ## Usage
 
 ```txt
-usage: generate.py [-h] [-d DIRECTORY] [--auto-add] [--auto-remove] [--sort-keys]
+usage: generate.py [-h] [-d DIRECTORY] [--auto-add] [--auto-translate] [--auto-remove] [--sort-keys]
                    json
 
 Update or Generate i18n JSON files
@@ -25,6 +25,7 @@ options:
   -d DIRECTORY, --directory DIRECTORY
                         Directory path
   --auto-add            Auto add missing keys
+  --auto-translate      Auto translate missing keys when they are added
   --auto-remove         Auto remove extra keys
   --sort-keys           Sort keys as they appear in i18n dataset
 ```

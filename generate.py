@@ -47,7 +47,7 @@ def process_html_files(directory):
 def update_json(
     json_file,
     i18n_dict,
-    flags={"sort_keys": True, "auto_remove": True, "auto_add": True},
+    flags={"sort_keys": True, "auto_remove": True, "auto_add": True, "auto_translate": False},
 ):
     with open(json_file, "r", encoding="utf-8") as file:
         data = json.load(file, object_pairs_hook=OrderedDict)
@@ -60,17 +60,20 @@ def update_json(
                 if i18n_dict[key] == "":
                     print(f"Skipping empty key '{key}'.")
                 if flags["auto_add"] and i18n_dict[key] != "":
-                    try:
-                        data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
-                    except Exception as x:
-                        if "No support for the provided language" in str(x):
-                            language = language.split("-")[0]+'-'+language.split("-")[1].upper()
-                            try:
-                                data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
-                            except Exception as y:
-                                if "No support for the provided language" in str(y):
-                                    language = language.split("-")[0]
+                    if flags["auto_translate"]:
+                        try:
+                            data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
+                        except Exception as x:
+                            if "No support for the provided language" in str(x):
+                                language = language.split("-")[0]+'-'+language.split("-")[1].upper()
+                                try:
                                     data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
+                                except Exception as y:
+                                    if "No support for the provided language" in str(y):
+                                        language = language.split("-")[0]
+                                        data[key] = GoogleTranslator(source="en", target=language).translate(i18n_dict[key])
+                    else:
+                        data[key] = i18n_dict[key]
 
     except Exception as e:
         print(f"Error processing '{json_file}': {e}", file=sys.stderr)
@@ -107,6 +110,12 @@ if __name__ == "__main__":
         default=True
     )
     argparser.add_argument(
+        "--auto-translate",
+        help="Auto translate missing keys when adding them",
+        action="store_true",
+        default=False,
+    )
+    argparser.add_argument(
         "--auto-remove",
         help="Auto remove extra keys",
         action="store_true",
@@ -134,8 +143,9 @@ if __name__ == "__main__":
     all_i18n_data = process_html_files(directory_path)
     flags = {
         "auto_add": args.auto_add,
+        "auto_translate": args.auto_translate,
         "auto_remove": args.auto_remove,
-        "sort_keys": args.sort_keys,
+        "sort_keys": args.sort_keys
     }
 
     if json_file_path:

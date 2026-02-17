@@ -8,7 +8,7 @@ Tools for working with frontend localization files.
 2. Extract keys from scripts (`t` template tag and `translate(...)`).
 3. Prune missing keys from localization files.
 4. Use automatic Google translation to auto-populate missing values.
-5. Sort JSON files by extracted key order.
+5. Sort JSON files by project tree order (source path + first appearance in file).
 
 ## Usage
 
@@ -28,7 +28,7 @@ options:
   --auto-add            Auto add missing keys
   --auto-translate      Auto translate missing keys when they are added
   --auto-remove         Auto remove extra keys
-  --sort-keys           Sort keys as they appear in i18n dataset
+  --sort-keys           Sort keys by project tree order (source path + first appearance in file)
 ```
 
 Dependencies: Python 3.10 and up.
